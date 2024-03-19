@@ -57,15 +57,9 @@ public class RestauranteController {
         if (restauranteOptional.isEmpty()) {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).body("Restaurante não encontrado");
         }
-
         Restaurante restaurante = restauranteOptional.get();
-
-        // Aqui, assumindo que RestauranteDTO contém as propriedades que devem ser copiadas para o objeto Restaurante
         BeanUtils.copyProperties(restauranteDTO, restaurante);
-
-        // Salvando as alterações no banco de dados
         restauranteRepository.save(restaurante);
-
         return ResponseEntity.status(HttpStatus.OK).body(restaurante);
     }
 
